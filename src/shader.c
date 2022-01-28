@@ -56,6 +56,17 @@ void use_shader(shader* self)
     glUseProgram(self->id);
 }
 
+void use_camera_matrices(shader* self, camera* camera)
+{
+    glUniformMatrix4fv(glGetUniformLocation(self->id, "v"), 1, 0, camera->v);
+    glUniformMatrix4fv(glGetUniformLocation(self->id, "p"), 1, 0, camera->p);
+}
+
+void set_model_matrix(shader* self, mat4 matrix)
+{
+    glUniformMatrix4fv(glGetUniformLocation(self->id, "m"), 1, 0, matrix);
+}
+
 void unload_shader(shader* self)
 {
     glDeleteShader(self->id);

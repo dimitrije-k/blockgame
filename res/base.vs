@@ -8,9 +8,11 @@ out vec3 f_pos;
 out vec3 f_color;
 out vec2 f_uv;
 
+uniform mat4 m, v, p;
+
 void main()
 {
-    gl_Position = vec4(v_pos, 1.0);
+    gl_Position = p * v * vec4(v_pos, 1.0);
 
     f_pos = v_pos;
     f_color = v_color;

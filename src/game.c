@@ -5,7 +5,7 @@ game init_game(void)
     game self = { 0 };
 
     self.window = init_window(800, 600, "Hello, game");
-    self.gr = init_game_renderer();
+    self.gr = init_game_renderer(&self.window);
 
     return self;
 }

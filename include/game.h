@@ -7,7 +7,7 @@
 struct _game
 {
     window window;
-    game_renderer gr;
+    game_renderer gr; 
 };
 
 typedef struct _game game;
