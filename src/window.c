@@ -10,11 +10,14 @@ window init_window(s32 width, s32 height, const char* title)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
+    glfwWindowHint(GLFW_RESIZABLE, false);
+
     self.glfw_window = glfwCreateWindow(width, height, title, NULL, NULL);
     self.mode.width = width;
     self.mode.height = height;
 
     glfwMakeContextCurrent(self.glfw_window);
+    gladLoadGL();
 
     return self;
 }

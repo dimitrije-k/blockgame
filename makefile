@@ -1,6 +1,6 @@
 CC=cc
 CFLAGS=-Wall -g -std=c99 -I"include"
-LDFLAGS=-lglfw3 -lGL -pthread -ldl -lm
+LDFLAGS=-lglfw3 -lGL -pthread -ldl -lm -lglad
 
 RM=rm -f
 
