@@ -8,9 +8,7 @@ TARGET=bin/game
 SRC=$(wildcard src/*.c)
 BIN=$(patsubst src/%.c,bin/%.o,$(SRC))
 
-.PHONY: all clean
-
-all:	$(TARGET)
+all:	$(TARGET) clean
 	./$(TARGET)
 
 clean:
