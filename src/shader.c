@@ -6,7 +6,7 @@ char* _read_ascii_file(const char* path, s32* len)
     assert(f);
 
     fseek(f, 0, SEEK_END);
-    *len = ftell(f);
+    *len = (int)ftell(f);
     fseek(f, 0, SEEK_SET);
 
     char* buf = malloc(*len);
@@ -29,13 +29,13 @@ shader load_shader(const char* vp, const char* fp)
     s32 len;
 
     buf = _read_ascii_file(vp, &len);
-    glShaderSource(vs, 1, buf, len);
+    glShaderSource(vs, 1, (const char* const*) &buf, &len);
     glCompileShader(vs);
 
     free(buf);
 
     buf = _read_ascii_file(fp, &len);
-    glShaderSource(fs, 1, buf, len);
+    glShaderSource(fs, 1, (const char* const*) &buf, &len);
     glCompileShader(fs);
 
     free(buf);
