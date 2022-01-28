@@ -13,6 +13,8 @@ struct _mesh
 struct vertex
 {
     float x, y, z;
+    float r, g, b;
+    float u, v;
 };
 
 typedef struct _mesh mesh;
