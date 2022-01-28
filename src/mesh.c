@@ -31,7 +31,7 @@ void render_mesh(mesh* self)
     glBindVertexArray(self->vao);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self->ebo);
 
-    glDrawArrays(GL_TRIANGLES, 0, self->icount);
+    glDrawElements(GL_TRIANGLES, self->icount, GL_UNSIGNED_INT, NULL);
 }
 
 void deinit_mesh(mesh* self)
