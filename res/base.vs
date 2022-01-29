@@ -12,7 +12,7 @@ uniform mat4 m, v, p;
 
 void main()
 {
-    gl_Position = p * v * vec4(v_pos, 1.0);
+    gl_Position = p * v * m * vec4(v_pos, 1.0);
 
     f_pos = v_pos;
     f_color = v_color;

@@ -1,5 +1,5 @@
 CC=cc
-CFLAGS=-Wall -g -std=c99 -I"include"
+CFLAGS=-Wall -Wno-incompatible-pointer-types -g -std=c99 -I"include"
 LDFLAGS=-lglfw3 -lGL -pthread -ldl -lm -lglad
 
 RM=rm -f
@@ -8,14 +8,18 @@ TARGET=bin/game
 SRC=$(wildcard src/*.c)
 BIN=$(patsubst src/%.c,bin/%.o,$(SRC))
 
-all:	$(TARGET) clean
-	./$(TARGET)
+all: $(TARGET) clean
+	@echo Executing $<
+	@./$(TARGET)
 
 clean:
-	$(RM) $(BIN)
+	@echo Removing $(words $(BIN)) files
+	@$(RM) $(BIN)
 
 $(TARGET): $(BIN)
-	$(CC) -o $@ $^ $(LDFLAGS)
+	@echo Linking $@
+	@$(CC) -o $@ $^ $(LDFLAGS)
 
 bin/%.o: src/%.c
-	$(CC) -c -o $@ $^ $(CFLAGS)
+	@echo Compiling $@
+	@$(CC) -c -o $@ $^ $(CFLAGS)

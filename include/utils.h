@@ -18,4 +18,6 @@ typedef signed int s32;
 typedef float f32;
 typedef double f64;
 
+#define CLAMPF(f, l, h) (float)((f < l) ? l : (f > h) ? h : f)
+
 #endif

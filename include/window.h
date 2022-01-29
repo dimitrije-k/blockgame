@@ -12,11 +12,12 @@ struct _window
     struct {
         s32 width, height;
     } mode;
+    void* game;
 };
 
 typedef struct _window window;
 
-window init_window(s32 width, s32 height, const char* title);
+window init_window(s32 width, s32 height, const char* title, void* game);
 
 bool is_window_open(window* self);
 
