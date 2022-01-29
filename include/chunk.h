@@ -6,7 +6,7 @@
 #include "mesh.h"
 
 #define CHUNK_WIDTH 16
-#define CHUNK_HEIGHT 16
+#define CHUNK_HEIGHT 256
 
 // chunky boii
 struct _chunk

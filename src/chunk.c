@@ -4,15 +4,23 @@
 
 chunk generate_chunk(s32 x, s32 y, s32 seed)
 {
-    chunk self = { GRASS };
+    chunk self = {  };
 
     for (int x = 0; x < CHUNK_WIDTH; x++)
     {
-        for (int y = 0; y < CHUNK_HEIGHT; y++)
+        for (int z = 0; z < CHUNK_WIDTH; z++)
         {
-            for (int z = 0; z < CHUNK_WIDTH; z++)
+            int height = 10;
+
+            for (int y = 0; y < CHUNK_HEIGHT; y++)
             {
-                self.blocks[x][y][z] = DIRT;
+                block_id block;
+
+                if (y > height) block = AIR;
+                else if (y == height) block = GRASS;
+                else if (y < height) block = DIRT;
+
+                self.blocks[x][y][z] = block;
             }
         }
     }
