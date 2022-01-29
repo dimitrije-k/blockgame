@@ -1,6 +1,7 @@
 #ifndef _game_renderer_h
 #define _game_renderer_h
 
+#include "world.h"
 #include "mesh.h"
 #include "shader.h"
 #include "texture.h"
@@ -8,7 +9,7 @@
 
 struct _game_renderer
 {
-    mesh mesh;
+    world* world;
     shader base_shader;
     texture base_texture;
     camera camera;

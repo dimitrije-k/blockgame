@@ -13,7 +13,7 @@ camera init_camera(window* window)
     self.rot.y = 90.0f;
 
     self.znear = 0.1f;
-    self.zfar = 100.0f;
+    self.zfar = 1024.0f;
 
     self.window = window;
 

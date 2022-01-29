@@ -8,6 +8,8 @@ game_renderer init_game_renderer(window* window)
     self.base_texture = load_texture("res/blocks.png");
     self.camera = init_camera(window);
 
+    self.camera.pos.y = 50.0f;
+
     return self;
 }
 
@@ -19,17 +21,25 @@ void render_game(game_renderer* self)
     project_camera(&self->camera);
     use_camera_matrices(&self->base_shader, &self->camera);
 
-    mat4 m; glm_mat4_identity(m);
-    set_model_matrix(&self->base_shader, m);
-
     glEnable(GL_CULL_FACE);
     glEnable(GL_DEPTH_TEST);
-    render_mesh(&self->mesh);
+
+    for (int x = 0; x < VIEW_DISTANCE * 2 + 1; x++)
+    {
+        for (int z = 0; z < VIEW_DISTANCE * 2 + 1; z++)
+        {
+            mat4 m; glm_mat4_identity(m);
+            glm_translate(m, (vec3){(f32)(x-VIEW_DISTANCE) * 16.0f, 0.0f, (f32)(z-VIEW_DISTANCE) * 16.0f});
+
+            set_model_matrix(&self->base_shader, m);
+
+            render_mesh(&self->world->chunks[x*(VIEW_DISTANCE*2+1)+z].chunk_mesh);
+        }
+    }
 }
 
 void deinit_game_renderer(game_renderer* self)
 {
-    deinit_mesh(&self->mesh);
     unload_texture(&self->base_texture);
     unload_shader(&self->base_shader);
 }

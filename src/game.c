@@ -19,9 +19,8 @@ game init_game(void)
     self.window = init_window(800, 600, "Hello, game", &self);
     self.gr = init_game_renderer(&self.window);
 
-    self.chunk = generate_chunk(0, 0, 0);
-
-    self.gr.mesh = generate_chunk_mesh(&self.chunk);//init_mesh(vertices, 4, indices, 6);
+    self.world = init_world();
+    self.gr.world = &self.world;
 
     return self;
 }
@@ -34,13 +33,13 @@ void run_game(game* self)
         update_window(&self->window);
 
         // Move camera
-        self->gr.camera.pos.x += ((float) self->keys.w - (float) self->keys.s) * self->delta_time * 4.0f * sinf(glm_rad(self->gr.camera.rot.x));
-        self->gr.camera.pos.z += ((float) self->keys.w - (float) self->keys.s) * self->delta_time * 4.0f * cosf(glm_rad(self->gr.camera.rot.x));
+        self->gr.camera.pos.x += ((float) self->keys.w - (float) self->keys.s) * self->delta_time * 8.0f * sinf(glm_rad(self->gr.camera.rot.x));
+        self->gr.camera.pos.z += ((float) self->keys.w - (float) self->keys.s) * self->delta_time * 8.0f * cosf(glm_rad(self->gr.camera.rot.x));
 
-        self->gr.camera.pos.x += ((float) self->keys.a - (float) self->keys.d) * self->delta_time * 4.0f * sinf(glm_rad(self->gr.camera.rot.x+90.0f));
-        self->gr.camera.pos.z += ((float) self->keys.a - (float) self->keys.d) * self->delta_time * 4.0f * cosf(glm_rad(self->gr.camera.rot.x+90.0f));
+        self->gr.camera.pos.x += ((float) self->keys.a - (float) self->keys.d) * self->delta_time * 8.0f * sinf(glm_rad(self->gr.camera.rot.x+90.0f));
+        self->gr.camera.pos.z += ((float) self->keys.a - (float) self->keys.d) * self->delta_time * 8.0f * cosf(glm_rad(self->gr.camera.rot.x+90.0f));
 
-        self->gr.camera.pos.y += ((float) self->keys.space - (float) self->keys.shift) * 5.0f * self->delta_time;
+        self->gr.camera.pos.y += ((float) self->keys.space - (float) self->keys.shift) * 9.0f * self->delta_time;
 
         if (glfwGetMouseButton(self->window.glfw_window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
         {
@@ -77,6 +76,7 @@ void run_game(game* self)
 
 void deinit_game(game* self)
 {
+    deinit_world(&self->world);
     deinit_game_renderer(&self->gr);
     deinit_window(&self->window);
 }

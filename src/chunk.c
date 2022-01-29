@@ -2,7 +2,7 @@
 
 #define F32(v) (float) (v)
 
-chunk generate_chunk(s32 x, s32 y, s32 seed)
+chunk generate_chunk(s32 cx, s32 cz, s32 seed)
 {
     chunk self = {  };
 
@@ -10,7 +10,7 @@ chunk generate_chunk(s32 x, s32 y, s32 seed)
     {
         for (int z = 0; z < CHUNK_WIDTH; z++)
         {
-            int height = 10;
+            int height = (int) (pnoise2d((f64)(x+cx+CHUNK_GEN_OFFSET) / 32.0, (f64)(z+cz+1000000+CHUNK_GEN_OFFSET) / 32.0, 1.0, 1, seed) * 20.0) + 30;
 
             for (int y = 0; y < CHUNK_HEIGHT; y++)
             {
